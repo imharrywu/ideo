@@ -5,15 +5,15 @@
 #include <boost/filesystem/operations.hpp>
 #include <fs.h>
 
-extern std::unique_ptr<QtumState> globalState;
+extern std::unique_ptr<IdeologyState> globalState;
 
 inline void initState(){
     boost::filesystem::path pathTemp;		
     pathTemp = fs::temp_directory_path() / strprintf("test_bitcoin_%lu_%i", (unsigned long)GetTime(), (int)(GetRand(100000)));
     boost::filesystem::create_directories(pathTemp);
-    const std::string dirQtum = pathTemp.string();
+    const std::string dirIdeology = pathTemp.string();
     const dev::h256 hashDB(dev::sha3(dev::rlp("")));
-    globalState = std::unique_ptr<QtumState>(new QtumState(dev::u256(0), QtumState::openDB(dirQtum, hashDB, dev::WithExisting::Trust), dirQtum + "/qtumDB", dev::eth::BaseState::Empty));
+    globalState = std::unique_ptr<IdeologyState>(new IdeologyState(dev::u256(0), IdeologyState::openDB(dirIdeology, hashDB, dev::WithExisting::Trust), dirIdeology + "/ideoDB", dev::eth::BaseState::Empty));
 
     globalState->setRootUTXO(dev::sha3(dev::rlp(""))); // temp
 }
@@ -27,7 +27,7 @@ inline CBlock generateBlock(){
     return block;
 }
 
-inline dev::Address createQtumAddress(dev::h256 hashTx, uint32_t voutNumber){
+inline dev::Address createIdeologyAddress(dev::h256 hashTx, uint32_t voutNumber){
     uint256 hashTXid(h256Touint(hashTx));
     std::vector<unsigned char> txIdAndVout(hashTXid.begin(), hashTXid.end());
     std::vector<unsigned char> voutNumberChrs;
@@ -45,12 +45,12 @@ inline dev::Address createQtumAddress(dev::h256 hashTx, uint32_t voutNumber){
 }
 
 
-inline QtumTransaction createQtumTransaction(valtype data, dev::u256 value, dev::u256 gasLimit, dev::u256 gasPrice, dev::h256 hashTransaction, dev::Address recipient, int32_t nvout = 0){
-    QtumTransaction txEth;
+inline IdeologyTransaction createIdeologyTransaction(valtype data, dev::u256 value, dev::u256 gasLimit, dev::u256 gasPrice, dev::h256 hashTransaction, dev::Address recipient, int32_t nvout = 0){
+    IdeologyTransaction txEth;
     if(recipient == dev::Address()){
-        txEth = QtumTransaction(value, gasPrice, gasLimit, data, dev::u256(0));
+        txEth = IdeologyTransaction(value, gasPrice, gasLimit, data, dev::u256(0));
     } else {
-        txEth = QtumTransaction(value, gasPrice, gasLimit, recipient, data, dev::u256(0));
+        txEth = IdeologyTransaction(value, gasPrice, gasLimit, recipient, data, dev::u256(0));
     }
     txEth.forceSender(dev::Address("0101010101010101010101010101010101010101"));
     txEth.setHashWith(hashTransaction);
@@ -59,10 +59,10 @@ inline QtumTransaction createQtumTransaction(valtype data, dev::u256 value, dev:
     return txEth;
 }
 
-inline std::pair<std::vector<ResultExecute>, ByteCodeExecResult> executeBC(std::vector<QtumTransaction> txs){
+inline std::pair<std::vector<ResultExecute>, ByteCodeExecResult> executeBC(std::vector<IdeologyTransaction> txs){
     CBlock block(generateBlock());
-    QtumDGP qtumDGP(globalState.get(), fGettingValuesDGP);
-    uint64_t blockGasLimit = qtumDGP.getBlockGasLimit(chainActive.Tip()->nHeight + 1);
+    IdeologyDGP ideoDGP(globalState.get(), fGettingValuesDGP);
+    uint64_t blockGasLimit = ideoDGP.getBlockGasLimit(chainActive.Tip()->nHeight + 1);
     ByteCodeExec exec(block, txs, blockGasLimit, chainActive.Tip());
     exec.performByteCode();
     std::vector<ResultExecute> res = exec.getResult();

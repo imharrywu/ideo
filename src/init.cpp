@@ -199,7 +199,7 @@ void Shutdown()
     /// for example if the data directory was found to be locked.
     /// Be sure that anything that writes files or flushes caches only does this if the respective
     /// module was initialized.
-    RenameThread("qtum-shutoff");
+    RenameThread("ideo-shutoff");
     mempool.AddTransactionsUpdated(1);
 
     StopHTTPRPC();
@@ -551,8 +551,8 @@ void SetupServerArgs()
 
 std::string LicenseInfo()
 {
-    const std::string URL_SOURCE_CODE = "<https://github.com/qtumproject/qtum>";
-    const std::string URL_WEBSITE = "<https://qtum.org>";
+    const std::string URL_SOURCE_CODE = "<https://github.com/ideoproject/ideo>";
+    const std::string URL_WEBSITE = "<https://ideo.org>";
 
     return CopyrightHolders(strprintf(_("Copyright (C) %i"), COPYRIGHT_YEAR) + " ") + "\n" +
            "\n" +
@@ -1265,7 +1265,7 @@ bool AppInitMain()
         }
     }
 
-////////////////////////////////////////////////////////////////////// // qtum
+////////////////////////////////////////////////////////////////////// // ideo
     dev::g_logPost = [&](std::string const& s, char const* c){ g_logger->LogPrintStr(s + '\n', true); };
     dev::g_logPost(std::string("\n\n\n\n\n\n\n\n\n\n"), NULL);
 //////////////////////////////////////////////////////////////////////
@@ -1571,7 +1571,7 @@ bool AppInitMain()
                     assert(chainActive.Tip() != nullptr);
                 }
 
-                /////////////////////////////////////////////////////////// qtum
+                /////////////////////////////////////////////////////////// ideo
                 if((gArgs.IsArgSet("-dgpstorage") && gArgs.IsArgSet("-dgpevm")) || (!gArgs.IsArgSet("-dgpstorage") && gArgs.IsArgSet("-dgpevm")) ||
                   (!gArgs.IsArgSet("-dgpstorage") && !gArgs.IsArgSet("-dgpevm"))){
                     fGettingValuesDGP = true;
@@ -1580,16 +1580,16 @@ bool AppInitMain()
                 }
 
                 dev::eth::Ethash::init();
-                fs::path qtumStateDir = GetDataDir() / "stateQtum";
-                bool fStatus = fs::exists(qtumStateDir);
-                const std::string dirQtum(qtumStateDir.string());
+                fs::path ideoStateDir = GetDataDir() / "stateIdeology";
+                bool fStatus = fs::exists(ideoStateDir);
+                const std::string dirIdeology(ideoStateDir.string());
                 const dev::h256 hashDB(dev::sha3(dev::rlp("")));
-                dev::eth::BaseState existsQtumstate = fStatus ? dev::eth::BaseState::PreExisting : dev::eth::BaseState::Empty;
-                globalState = std::unique_ptr<QtumState>(new QtumState(dev::u256(0), QtumState::openDB(dirQtum, hashDB, dev::WithExisting::Trust), dirQtum, existsQtumstate));
-                dev::eth::ChainParams cp((dev::eth::genesisInfo(dev::eth::Network::qtumMainNetwork)));
+                dev::eth::BaseState existsIdeologystate = fStatus ? dev::eth::BaseState::PreExisting : dev::eth::BaseState::Empty;
+                globalState = std::unique_ptr<IdeologyState>(new IdeologyState(dev::u256(0), IdeologyState::openDB(dirIdeology, hashDB, dev::WithExisting::Trust), dirIdeology, existsIdeologystate));
+                dev::eth::ChainParams cp((dev::eth::genesisInfo(dev::eth::Network::ideoMainNetwork)));
                 globalSealEngine = std::unique_ptr<dev::eth::SealEngineFace>(cp.createSealEngine());
 
-                pstorageresult.reset(new StorageResults(qtumStateDir.string()));
+                pstorageresult.reset(new StorageResults(ideoStateDir.string()));
                 if (fReset) {
                     pstorageresult->wipeResults();
                 }
@@ -1610,7 +1610,7 @@ bool AppInitMain()
                 ///////////////////////////////////////////////////////////
 
 #ifdef ENABLE_BITCORE_RPC
-                /////////////////////////////////////////////////////////////// // qtum
+                /////////////////////////////////////////////////////////////// // ideo
                 if (fAddressIndex != gArgs.GetBoolArg("-addrindex", DEFAULT_ADDRINDEX)) {
                     strLoadError = _("You need to rebuild the database using -reindex-chainstate to change -addrindex");
                     break;

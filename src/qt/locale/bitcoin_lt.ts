@@ -84,7 +84,7 @@
     </message>
 </context>
 <context>
-    <name>QtumGUI</name>
+    <name>IdeologyGUI</name>
     <message>
         <source>Sign &amp;message...</source>
         <translation>Pasirašyti ži&amp;nutę...</translation>
@@ -170,8 +170,8 @@
         <translation>Blokai iš naujo indeksuojami...</translation>
     </message>
     <message>
-        <source>Send coins to a Qtum address</source>
-        <translation>Siųsti monetas Qtum adresui</translation>
+        <source>Send coins to a Ideology address</source>
+        <translation>Siųsti monetas Ideology adresui</translation>
     </message>
     <message>
         <source>Backup wallet to another location</source>
@@ -194,8 +194,8 @@
         <translation>&amp;Tikrinti žinutę...</translation>
     </message>
     <message>
-        <source>Qtum</source>
-        <translation>Qtum</translation>
+        <source>Ideology</source>
+        <translation>Ideology</translation>
     </message>
     <message>
         <source>Wallet</source>
@@ -383,8 +383,8 @@
         <translation>Sveiki</translation>
     </message>
     <message>
-        <source>Qtum</source>
-        <translation>Qtum</translation>
+        <source>Ideology</source>
+        <translation>Ideology</translation>
     </message>
     <message>
         <source>Error</source>
@@ -436,8 +436,8 @@
         <translation>Piniginė</translation>
     </message>
     <message>
-        <source>Automatically open the Qtum client port on the router. This only works when your router supports UPnP and it is enabled.</source>
-        <translation>Automatiškai atidaryti Qtum kliento prievadą maršrutizatoriuje. Tai veikia tik tada, kai jūsų maršrutizatorius palaiko UPnP ir ji įjungta.</translation>
+        <source>Automatically open the Ideology client port on the router. This only works when your router supports UPnP and it is enabled.</source>
+        <translation>Automatiškai atidaryti Ideology kliento prievadą maršrutizatoriuje. Tai veikia tik tada, kai jūsų maršrutizatorius palaiko UPnP ir ji įjungta.</translation>
     </message>
     <message>
         <source>Map port using &amp;UPnP</source>
@@ -885,7 +885,7 @@
         <translation>Įveskite pranešimą, kurį norite pasirašyti čia</translation>
     </message>
     <message>
-        <source>Sign the message to prove you own this Qtum address</source>
+        <source>Sign the message to prove you own this Ideology address</source>
         <translation>Registruotis žinute įrodymuii, kad turite šį adresą</translation>
     </message>
     <message>
@@ -901,8 +901,8 @@
         <translation>&amp;Patikrinti žinutę</translation>
     </message>
     <message>
-        <source>Verify the message to ensure it was signed with the specified Qtum address</source>
-        <translation>Patikrinkite žinutę, jog įsitikintumėte, kad ją pasirašė nurodytas Qtum adresas</translation>
+        <source>Verify the message to ensure it was signed with the specified Ideology address</source>
+        <translation>Patikrinkite žinutę, jog įsitikintumėte, kad ją pasirašė nurodytas Ideology adresas</translation>
     </message>
     <message>
         <source>Verify &amp;Message</source>
@@ -956,10 +956,10 @@
     <name>WalletView</name>
     </context>
 <context>
-    <name>qtum-core</name>
+    <name>ideo-core</name>
     <message>
-        <source>Qtum Core</source>
-        <translation>Qtum branduolys</translation>
+        <source>Ideology Core</source>
+        <translation>Ideology branduolys</translation>
     </message>
     <message>
         <source>Error opening block database</source>

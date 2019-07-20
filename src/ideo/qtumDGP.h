@@ -1,7 +1,7 @@
-#ifndef QTUMDGP_H
-#define QTUMDGP_H
+#ifndef IDEODGP_H
+#define IDEODGP_H
 
-#include <qtum/qtumstate.h>
+#include <ideo/ideostate.h>
 #include <primitives/block.h>
 #include <validation.h>
 #include <utilstrencodings.h>
@@ -24,11 +24,11 @@ static const uint64_t MIN_BLOCK_GAS_LIMIT_DGP = 1000000;
 static const uint64_t MAX_BLOCK_GAS_LIMIT_DGP = 1000000000;
 static const uint64_t DEFAULT_BLOCK_GAS_LIMIT_DGP = 40000000;
 
-class QtumDGP {
+class IdeologyDGP {
     
 public:
 
-    QtumDGP(QtumState* _state, bool _dgpevm = true) : dgpevm(_dgpevm), state(_state) { initDataEIP158(); }
+    IdeologyDGP(IdeologyState* _state, bool _dgpevm = true) : dgpevm(_dgpevm), state(_state) { initDataEIP158(); }
 
     dev::eth::EVMSchedule getGasSchedule(unsigned int blockHeight);
 
@@ -74,7 +74,7 @@ private:
 
     bool dgpevm;
 
-    const QtumState* state;
+    const IdeologyState* state;
 
     dev::Address templateContract;
 

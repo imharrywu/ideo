@@ -5,12 +5,12 @@ from test_framework.util import *
 from test_framework.script import *
 from test_framework.mininode import *
 from test_framework.address import *
-from test_framework.qtum import *
+from test_framework.ideo import *
 import sys
 import random
 import time
 
-class QtumPrioritizeCreateOverCallTest(BitcoinTestFramework):
+class IdeologyPrioritizeCreateOverCallTest(BitcoinTestFramework):
     def set_test_params(self):
         self.setup_clean_chain = True
         self.num_nodes = 1
@@ -67,4 +67,4 @@ class QtumPrioritizeCreateOverCallTest(BitcoinTestFramework):
         assert_equal(self.node.listcontracts()[self.contract_address], 1)
 
 if __name__ == '__main__':
-    QtumPrioritizeCreateOverCallTest().main()
+    IdeologyPrioritizeCreateOverCallTest().main()

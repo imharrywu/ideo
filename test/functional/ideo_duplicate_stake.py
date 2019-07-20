@@ -5,11 +5,11 @@ from test_framework.util import *
 from test_framework.script import *
 from test_framework.mininode import *
 from test_framework.messages import *
-from test_framework.qtum import *
+from test_framework.ideo import *
 import time
 
 
-class QtumDuplicateStakeTest(BitcoinTestFramework):
+class IdeologyDuplicateStakeTest(BitcoinTestFramework):
     def set_test_params(self):
         self.setup_clean_chain = True
         self.num_nodes = 2
@@ -179,4 +179,4 @@ class QtumDuplicateStakeTest(BitcoinTestFramework):
 
 
 if __name__ == '__main__':
-    QtumDuplicateStakeTest().main()
+    IdeologyDuplicateStakeTest().main()

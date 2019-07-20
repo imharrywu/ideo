@@ -5,12 +5,12 @@ from test_framework.util import *
 from test_framework.script import *
 from test_framework.mininode import *
 from test_framework.address import *
-from test_framework.qtum import *
+from test_framework.ideo import *
 import sys
 import random
 import time
 
-class QtumTransactionPrioritizationTest(BitcoinTestFramework):
+class IdeologyTransactionPrioritizationTest(BitcoinTestFramework):
     def set_test_params(self):
         self.setup_clean_chain = True
         self.num_nodes = 1
@@ -289,4 +289,4 @@ class QtumTransactionPrioritizationTest(BitcoinTestFramework):
         self.verify_contract_ancestor_txs_test(with_restart=True, use_staking=True)
 
 if __name__ == '__main__':
-    QtumTransactionPrioritizationTest().main()
+    IdeologyTransactionPrioritizationTest().main()

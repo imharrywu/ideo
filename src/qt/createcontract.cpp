@@ -110,7 +110,7 @@ CreateContract::~CreateContract()
 void CreateContract::setLinkLabels()
 {
     ui->labelSolidity->setOpenExternalLinks(true);
-    ui->labelSolidity->setText("<a href=\"https://qmix.qtum.org/\">Solidity compiler</a>");
+    ui->labelSolidity->setText("<a href=\"https://qmix.ideo.org/\">Solidity compiler</a>");
 }
 
 void CreateContract::setModel(WalletModel *_model)
@@ -233,7 +233,7 @@ void CreateContract::on_gasInfoChanged(quint64 blockGasLimit, quint64 minGasPric
 {
     Q_UNUSED(nGasPrice);
     ui->labelGasLimit->setToolTip(tr("Gas limit. Default = %1, Max = %2").arg(DEFAULT_GAS_LIMIT_OP_CREATE).arg(blockGasLimit));
-    ui->labelGasPrice->setToolTip(tr("Gas price: QTUM price per gas unit. Default = %1, Min = %2").arg(QString::fromStdString(FormatMoney(DEFAULT_GAS_PRICE))).arg(QString::fromStdString(FormatMoney(minGasPrice))));
+    ui->labelGasPrice->setToolTip(tr("Gas price: IDEO price per gas unit. Default = %1, Min = %2").arg(QString::fromStdString(FormatMoney(DEFAULT_GAS_PRICE))).arg(QString::fromStdString(FormatMoney(minGasPrice))));
     ui->lineEditGasPrice->setMinimum(minGasPrice);
     ui->lineEditGasLimit->setMaximum(blockGasLimit);
 }

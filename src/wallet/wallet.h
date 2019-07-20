@@ -788,7 +788,7 @@ private:
      * Wallet staking coins.
      */
     boost::thread_group* stakeThread = nullptr;
-    void StakeQtums(bool fStake, CConnman* connman);
+    void StakeIdeologys(bool fStake, CConnman* connman);
 
 public:
     /*
@@ -1302,11 +1302,11 @@ public:
     /* Remove token entry from the wallet */
     bool RemoveTokenEntry(const uint256& tokenHash, bool fFlushOnClose=true);
 
-    /* Start staking qtums */
-    void StartStake(CConnman* connman) { StakeQtums(true, connman); }
+    /* Start staking ideos */
+    void StartStake(CConnman* connman) { StakeIdeologys(true, connman); }
 
-    /* Stop staking qtums */
-    void StopStake() { StakeQtums(false, 0); }
+    /* Stop staking ideos */
+    void StopStake() { StakeIdeologys(false, 0); }
 
     /* Clean token transaction entries in the wallet */
     bool CleanTokenTxEntries(bool fFlushOnClose=true);

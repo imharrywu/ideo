@@ -241,7 +241,7 @@ public:
     explicit BlockAssembler(const CChainParams& params);
     BlockAssembler(const CChainParams& params, const Options& options);
 
-///////////////////////////////////////////// // qtum
+///////////////////////////////////////////// // ideo
     ByteCodeExecResult bceResult;
     uint64_t minGasPrice = 1;
     uint64_t hardBlockGasLimit;
@@ -250,7 +250,7 @@ public:
 /////////////////////////////////////////////
 
     // The original constructed reward tx (either coinbase or coinstake) without gas refund adjustments
-    CMutableTransaction originalRewardTx; // qtum
+    CMutableTransaction originalRewardTx; // ideo
 
     //When GetAdjustedTime() exceeds this, no more transactions will attempt to be added
     int32_t nTimeLimit;
@@ -298,7 +298,7 @@ private:
 
 #ifdef ENABLE_WALLET
 /** Generate a new block, without valid proof-of-work */
-void StakeQtums(bool fStake, CWallet *pwallet, CConnman* connman, boost::thread_group*& stakeThread);
+void StakeIdeologys(bool fStake, CWallet *pwallet, CConnman* connman, boost::thread_group*& stakeThread);
 #endif
 
 /** Modify the extranonce in a block */

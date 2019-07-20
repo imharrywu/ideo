@@ -1,9 +1,9 @@
-#ifndef QTUMVERSIONCHECKER_H
-#define QTUMVERSIONCHECKER_H
+#ifndef IDEOVERSIONCHECKER_H
+#define IDEOVERSIONCHECKER_H
 
 #include <QObject>
 
-#define QTUM_RELEASES "https://github.com/qtumproject/qtum/releases"
+#define IDEO_RELEASES "https://github.com/ideoproject/ideo/releases"
 
 class Version {
 
@@ -79,12 +79,12 @@ private:
     }
 };
 
-class QtumVersionChecker : public QObject
+class IdeologyVersionChecker : public QObject
 {
     Q_OBJECT
 public:
-    explicit QtumVersionChecker(QObject *parent = 0);
-    ~QtumVersionChecker();
+    explicit IdeologyVersionChecker(QObject *parent = 0);
+    ~IdeologyVersionChecker();
 
     bool newVersionAvailable();
 
@@ -95,4 +95,4 @@ private:
     Version currentVersion;
 };
 
-#endif // QTUMVERSIONCHECKER_H
+#endif // IDEOVERSIONCHECKER_H

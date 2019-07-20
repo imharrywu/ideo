@@ -6,7 +6,7 @@
 #include <crypto/ripemd160.h>
 #include <uint256.h>
 #include <primitives/transaction.h>
-#include <qtum/qtumtransaction.h>
+#include <ideo/ideotransaction.h>
 
 #include <libethereum/Executive.h>
 #include <libethcore/SealEngine.h>
@@ -35,7 +35,7 @@ struct ResultExecute{
     CTransaction tx;
 };
 
-namespace qtum{
+namespace ideo{
     template <class DB>
     dev::AddressHash commit(std::unordered_map<dev::Address, Vin> const& _cache, dev::eth::SecureTrieDB<dev::Address, DB>& _state, std::unordered_map<dev::Address, dev::eth::Account> const& _cacheAcc)
     {
@@ -56,15 +56,15 @@ namespace qtum{
 
 class CondensingTX;
 
-class QtumState : public dev::eth::State {
+class IdeologyState : public dev::eth::State {
     
 public:
 
-    QtumState();
+    IdeologyState();
 
-    QtumState(dev::u256 const& _accountStartNonce, dev::OverlayDB const& _db, const std::string& _path, dev::eth::BaseState _bs = dev::eth::BaseState::PreExisting);
+    IdeologyState(dev::u256 const& _accountStartNonce, dev::OverlayDB const& _db, const std::string& _path, dev::eth::BaseState _bs = dev::eth::BaseState::PreExisting);
 
-    ResultExecute execute(dev::eth::EnvInfo const& _envInfo, dev::eth::SealEngineFace const& _sealEngine, QtumTransaction const& _t, dev::eth::Permanence _p = dev::eth::Permanence::Committed, dev::eth::OnOpFunc const& _onOp = OnOpFunc());
+    ResultExecute execute(dev::eth::EnvInfo const& _envInfo, dev::eth::SealEngineFace const& _sealEngine, IdeologyTransaction const& _t, dev::eth::Permanence _p = dev::eth::Permanence::Committed, dev::eth::OnOpFunc const& _onOp = OnOpFunc());
 
     void setRootUTXO(dev::h256 const& _r) { cacheUTXO.clear(); stateUTXO.setRoot(_r); }
 
@@ -78,7 +78,7 @@ public:
 
     dev::OverlayDB& dbUtxo() { return dbUTXO; }
 
-    static const dev::Address createQtumAddress(dev::h256 hashTx, uint32_t voutNumber){
+    static const dev::Address createIdeologyAddress(dev::h256 hashTx, uint32_t voutNumber){
         uint256 hashTXid(h256Touint(hashTx));
         std::vector<unsigned char> txIdAndVout(hashTXid.begin(), hashTXid.end());
         std::vector<unsigned char> voutNumberChrs;
@@ -95,7 +95,7 @@ public:
         return dev::Address(hashTxIdAndVout);
     }
 
-    virtual ~QtumState(){}
+    virtual ~IdeologyState(){}
 
     friend CondensingTX;
 
@@ -132,11 +132,11 @@ private:
 
 
 struct TemporaryState{
-    std::unique_ptr<QtumState>& globalStateRef;
+    std::unique_ptr<IdeologyState>& globalStateRef;
     dev::h256 oldHashStateRoot;
     dev::h256 oldHashUTXORoot;
 
-    TemporaryState(std::unique_ptr<QtumState>& _globalStateRef) : 
+    TemporaryState(std::unique_ptr<IdeologyState>& _globalStateRef) : 
         globalStateRef(_globalStateRef),
         oldHashStateRoot(globalStateRef->rootHash()), 
         oldHashUTXORoot(globalStateRef->rootHashUTXO()) {}
@@ -164,7 +164,7 @@ class CondensingTX{
 
 public:
 
-    CondensingTX(QtumState* _state, const std::vector<TransferInfo>& _transfers, const QtumTransaction& _transaction, std::set<dev::Address> _deleteAddresses = std::set<dev::Address>()) : transfers(_transfers), deleteAddresses(_deleteAddresses), transaction(_transaction), state(_state){}
+    CondensingTX(IdeologyState* _state, const std::vector<TransferInfo>& _transfers, const IdeologyTransaction& _transaction, std::set<dev::Address> _deleteAddresses = std::set<dev::Address>()) : transfers(_transfers), deleteAddresses(_deleteAddresses), transaction(_transaction), state(_state){}
 
     CTransaction createCondensingTX();
 
@@ -200,9 +200,9 @@ private:
     //So, making this unordered_set could be an attack vector
     const std::set<dev::Address> deleteAddresses;
 
-    const QtumTransaction& transaction;
+    const IdeologyTransaction& transaction;
 
-    QtumState* state;
+    IdeologyState* state;
 
     bool voutOverflow = false;
 

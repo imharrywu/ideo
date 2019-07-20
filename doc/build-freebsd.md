@@ -2,7 +2,7 @@ FreeBSD build guide
 ======================
 (updated for FreeBSD 11.1)
 
-This guide describes how to build qtumd and command-line utilities on FreeBSD.
+This guide describes how to build ideod and command-line utilities on FreeBSD.
 
 This guide does not contain instructions for building the GUI.
 
@@ -24,10 +24,10 @@ See [dependencies.md](dependencies.md) for a complete overview.
 
 Download the source code:
 ```
-git clone https://github.com/qtumproject/qtum --recursive
+git clone https://github.com/ideoproject/ideo --recursive
 ```
 
-## Building Qtum Core
+## Building Ideology Core
 
 **Important**: Use `gmake` (the non-GNU `make` will exit with an error).
 

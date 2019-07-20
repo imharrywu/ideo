@@ -1,14 +1,14 @@
 #!/usr/bin/env python3
 
 from test_framework.test_framework import BitcoinTestFramework
-from test_framework.qtum import activate_mpos
-from test_framework.qtumconfig import COINBASE_MATURITY
+from test_framework.ideo import activate_mpos
+from test_framework.ideoconfig import COINBASE_MATURITY
 from test_framework.address import byte_to_base58
 from test_framework.messages import hash256
 import time
 import struct
 
-class QtumCallContractTimestampTest(BitcoinTestFramework):
+class IdeologyCallContractTimestampTest(BitcoinTestFramework):
     def set_test_params(self):
         self.num_nodes = 1
         self.setup_clean_chain = True
@@ -47,4 +47,4 @@ class QtumCallContractTimestampTest(BitcoinTestFramework):
         assert(expected_now == now or expected_now == now+1)
 
 if __name__ == '__main__':
-    QtumCallContractTimestampTest().main()
+    IdeologyCallContractTimestampTest().main()

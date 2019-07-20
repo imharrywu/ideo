@@ -5,12 +5,12 @@ from test_framework.util import *
 from test_framework.script import *
 from test_framework.mininode import *
 from test_framework.address import *
-from test_framework.qtum import *
+from test_framework.ideo import *
 import sys
 import random
 import time
 
-class QtumPrematureCoinstakeSpendTest(BitcoinTestFramework):
+class IdeologyPrematureCoinstakeSpendTest(BitcoinTestFramework):
     def set_test_params(self):
         self.setup_clean_chain = True
         self.num_nodes = 1
@@ -78,4 +78,4 @@ class QtumPrematureCoinstakeSpendTest(BitcoinTestFramework):
         self.assert_spend_of_coinstake_at_height(height=4502, should_accept=False)
 
 if __name__ == '__main__':
-    QtumPrematureCoinstakeSpendTest().main()
+    IdeologyPrematureCoinstakeSpendTest().main()

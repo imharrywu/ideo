@@ -5,13 +5,13 @@ from test_framework.util import *
 from test_framework.script import *
 from test_framework.mininode import *
 from test_framework.address import *
-from test_framework.qtum import *
+from test_framework.ideo import *
 import sys
 import random
 import time
 import io
 
-class QtumAssignMPoSFeesToGasRefundTest(BitcoinTestFramework):
+class IdeologyAssignMPoSFeesToGasRefundTest(BitcoinTestFramework):
     def set_test_params(self):
         self.setup_clean_chain = True
         self.num_nodes = 1
@@ -73,4 +73,4 @@ class QtumAssignMPoSFeesToGasRefundTest(BitcoinTestFramework):
         assert_equal(self.node.getblockcount(), blockcount)
 
 if __name__ == '__main__':
-    QtumAssignMPoSFeesToGasRefundTest().main()
+    IdeologyAssignMPoSFeesToGasRefundTest().main()

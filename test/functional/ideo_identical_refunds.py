@@ -4,12 +4,12 @@ from test_framework.test_framework import BitcoinTestFramework
 from test_framework.util import *
 from test_framework.script import *
 from test_framework.mininode import *
-from test_framework.qtum import *
+from test_framework.ideo import *
 from test_framework.blocktools import *
 import time
 import io
 
-class QtumIdenticalRefunds(BitcoinTestFramework):
+class IdeologyIdenticalRefunds(BitcoinTestFramework):
     def set_test_params(self):
         self.setup_clean_chain = True
         self.num_nodes = 1
@@ -33,9 +33,9 @@ class QtumIdenticalRefunds(BitcoinTestFramework):
         # This will result in the same amount of gas being spent and thus the same amount being refunded.
         sender_address = self.node.getnewaddress()
         self.node.sendtoaddress(sender_address, 1)
-        self.node.sendtocontract(contract_address, "00", 0, 1000000, QTUM_MIN_GAS_PRICE_STR, sender_address)
+        self.node.sendtocontract(contract_address, "00", 0, 1000000, IDEO_MIN_GAS_PRICE_STR, sender_address)
         self.node.sendtoaddress(sender_address, 1)
-        self.node.sendtocontract(contract_address, "00", 0, 1000000, QTUM_MIN_GAS_PRICE_STR, sender_address)
+        self.node.sendtocontract(contract_address, "00", 0, 1000000, IDEO_MIN_GAS_PRICE_STR, sender_address)
 
         # Check that all txs were accepted into the mempool.
         assert_equal(len(self.node.getrawmempool()), 4)
@@ -74,4 +74,4 @@ class QtumIdenticalRefunds(BitcoinTestFramework):
         assert_equal(self.node.getblockcount(), block_count)
         
 if __name__ == '__main__':
-    QtumIdenticalRefunds().main()
+    IdeologyIdenticalRefunds().main()

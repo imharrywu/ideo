@@ -7,7 +7,7 @@ from test_framework.test_framework import BitcoinTestFramework
 from test_framework.util import *
 from test_framework.script import *
 from test_framework.mininode import *
-from test_framework.qtum import *
+from test_framework.ideo import *
 import sys
 import time
 
@@ -66,7 +66,7 @@ class SendToContractTest(BitcoinTestFramework):
 
     # Verifies that the contract storage, abi, balance work correctly
     def sendtocontract_verify_storage_and_balance_test(self):
-        # call set owner with 9999999999999999999999999999999999999999 as owner with 100 qtum
+        # call set owner with 9999999999999999999999999999999999999999 as owner with 100 ideo
         ret = self.node.sendtocontract(self.contract_address, "13af40350000000000000000000000009999999999999999999999999999999999999999", 100)
         assert('txid' in ret)
         assert('sender' in ret)
@@ -85,8 +85,8 @@ class SendToContractTest(BitcoinTestFramework):
         self.node.importprivkey("cQWxca9y9XBf4c6ohTwRQ9Kf4GZyRybhGBfzaFgkvRpw8HjbRC58")
         self.node.sendtoaddress("qabmqZk3re5b9UpUcznxDkCnCsnKdmPktT", 0.1)
         self.node.generate(1)
-        # call setSenderAsOwner with 100 qtum
-        ret = self.node.sendtocontract(self.contract_address, "2bcf51b4", 100, 1000000, QTUM_MIN_GAS_PRICE_STR, "qabmqZk3re5b9UpUcznxDkCnCsnKdmPktT")
+        # call setSenderAsOwner with 100 ideo
+        ret = self.node.sendtocontract(self.contract_address, "2bcf51b4", 100, 1000000, IDEO_MIN_GAS_PRICE_STR, "qabmqZk3re5b9UpUcznxDkCnCsnKdmPktT")
         assert('txid' in ret)
         assert('sender' in ret)
         assert('hash160' in ret)
@@ -103,8 +103,8 @@ class SendToContractTest(BitcoinTestFramework):
     def sendtocontract_no_broadcast(self):
         self.node.sendtoaddress("qabmqZk3re5b9UpUcznxDkCnCsnKdmPktT", 0.1)
         self.node.generate(1)
-        # call setSenderAsOwner with 100 qtum
-        ret = self.node.sendtocontract(self.contract_address, "2bcf51b4", 100, 1000000, QTUM_MIN_GAS_PRICE_STR, "qabmqZk3re5b9UpUcznxDkCnCsnKdmPktT", False)
+        # call setSenderAsOwner with 100 ideo
+        ret = self.node.sendtocontract(self.contract_address, "2bcf51b4", 100, 1000000, IDEO_MIN_GAS_PRICE_STR, "qabmqZk3re5b9UpUcznxDkCnCsnKdmPktT", False)
         assert('raw transaction' in ret)
         assert(len(ret.keys()) == 1)
         decoded_tx = self.node.decoderawtransaction(ret['raw transaction'])

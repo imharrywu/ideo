@@ -5,7 +5,7 @@ from test_framework.util import *
 from test_framework.script import *
 from test_framework.mininode import *
 from test_framework.address import *
-from test_framework.qtum import *
+from test_framework.ideo import *
 from test_framework.blocktools import *
 import sys
 import random
@@ -19,7 +19,7 @@ def rpc_sign_transaction(node, tx):
     tx_signed.deserialize(f)
     return tx_signed
 
-class QtumNoExecCallDisabledTest(BitcoinTestFramework):
+class IdeologyNoExecCallDisabledTest(BitcoinTestFramework):
     def set_test_params(self):
         self.setup_clean_chain = True
         self.num_nodes = 1
@@ -48,7 +48,7 @@ class QtumNoExecCallDisabledTest(BitcoinTestFramework):
         tx = rpc_sign_transaction(self.node, tx)
         assert_raises_rpc_error(-26, "bad-tx-version-rootvm", self.node.sendrawtransaction, bytes_to_hex_str(tx.serialize()))
 
-        tx.vout = [CTxOut(int(COIN - 10000000), scriptPubKey=CScript([b"\x00", CScriptNum(100000), CScriptNum(QTUM_MIN_GAS_PRICE), b"\x00", hex_str_to_bytes(contract_address), OP_CALL]))]
+        tx.vout = [CTxOut(int(COIN - 10000000), scriptPubKey=CScript([b"\x00", CScriptNum(100000), CScriptNum(IDEO_MIN_GAS_PRICE), b"\x00", hex_str_to_bytes(contract_address), OP_CALL]))]
         tx = rpc_sign_transaction(self.node, tx)
         assert_raises_rpc_error(-26, "bad-tx-version-rootvm", self.node.sendrawtransaction, bytes_to_hex_str(tx.serialize()))
 
@@ -72,4 +72,4 @@ class QtumNoExecCallDisabledTest(BitcoinTestFramework):
 
 
 if __name__ == '__main__':
-    QtumNoExecCallDisabledTest().main()
+    IdeologyNoExecCallDisabledTest().main()

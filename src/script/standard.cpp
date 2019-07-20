@@ -11,8 +11,8 @@
 #include <util.h>
 #include <utilstrencodings.h>
 
-#include <qtum/qtumstate.h>
-#include <qtum/qtumtransaction.h>
+#include <ideo/ideostate.h>
+#include <ideo/ideotransaction.h>
 #include <validation.h>
 
 typedef std::vector<unsigned char> valtype;
@@ -192,7 +192,7 @@ bool Solver(const CScript& scriptPubKey, txnouttype& typeRet, std::vector<std::v
                 else
                     break;
             }
-            /////////////////////////////////////////////////////////// qtum
+            /////////////////////////////////////////////////////////// ideo
             else if (opcode2 == OP_VERSION)
             {
                 if(0 <= opcode1 && opcode1 <= OP_PUSHDATA4)
@@ -531,7 +531,7 @@ bool ExtractDestination(const COutPoint& prevout, const CScript& scriptPubKey, C
         return true;
     }
     else if (whichType == TX_CREATE) {
-        addressRet = CKeyID(uint160(QtumState::createQtumAddress(uintToh256(prevout.hash), prevout.n).asBytes()));
+        addressRet = CKeyID(uint160(IdeologyState::createIdeologyAddress(uintToh256(prevout.hash), prevout.n).asBytes()));
         return true;
     }
     return false;

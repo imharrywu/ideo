@@ -6,7 +6,7 @@ DIST_SUBDIRS = secp256k1 univalue
 
 AM_LDFLAGS = $(PTHREAD_CFLAGS) $(LIBTOOL_LDFLAGS) $(HARDENED_LDFLAGS) $(GPROF_LDFLAGS) $(SANITIZER_LDFLAGS)
 AM_CXXFLAGS = $(DEBUG_CXXFLAGS) $(HARDENED_CXXFLAGS) $(WARN_CXXFLAGS) $(NOWARN_CXXFLAGS) $(ERROR_CXXFLAGS) $(GPROF_CXXFLAGS) $(SANITIZER_CXXFLAGS) -DETH_FATDB=1
-AM_CPPFLAGS = $(DEBUG_CPPFLAGS) $(HARDENED_CPPFLAGS) -DQTUM_BUILD
+AM_CPPFLAGS = $(DEBUG_CPPFLAGS) $(HARDENED_CPPFLAGS) -DIDEO_BUILD
 AM_LIBTOOLFLAGS = --preserve-dup-deps
 EXTRA_LIBRARIES =
 
@@ -85,11 +85,11 @@ TESTS =
 BENCHMARKS =
 
 if BUILD_BITCOIND
-  bin_PROGRAMS += qtumd
+  bin_PROGRAMS += ideod
 endif
 
 if BUILD_BITCOIN_UTILS
-  bin_PROGRAMS += qtum-cli qtum-tx
+  bin_PROGRAMS += ideo-cli ideo-tx
 endif
 
 .PHONY: FORCE check-symbols check-security
@@ -209,10 +209,10 @@ BITCOIN_CORE_H = \
   zmq/zmqnotificationinterface.h \
   zmq/zmqpublishnotifier.h \
   zmq/zmqrpc.h \
-  qtum/qtumstate.h \
-  qtum/qtumtransaction.h \
-  qtum/qtumDGP.h \
-  qtum/storageresults.h
+  ideo/ideostate.h \
+  ideo/ideotransaction.h \
+  ideo/ideoDGP.h \
+  ideo/storageresults.h
 
 
 obj/build.h: FORCE
@@ -267,11 +267,11 @@ libbitcoin_server_a_SOURCES = \
   validation.cpp \
   validationinterface.cpp \
   versionbits.cpp \
-  qtum/qtumstate.cpp \
-  qtum/qtumtransaction.cpp \
-  qtum/qtumDGP.cpp \
+  ideo/ideostate.cpp \
+  ideo/ideotransaction.cpp \
+  ideo/ideoDGP.cpp \
   consensus/consensus.cpp \
-  qtum/storageresults.cpp \
+  ideo/storageresults.cpp \
   $(BITCOIN_CORE_H)
 
 if ENABLE_ZMQ
@@ -402,7 +402,7 @@ libbitcoin_consensus_a_SOURCES = \
   version.h
 
 # common: shared between bitcoind, and bitcoin-qt and non-server tools
-libbitcoin_common_a_CPPFLAGS = $(AM_CPPFLAGS) $(BITCOIN_INCLUDES) -DQTUM_BUILD
+libbitcoin_common_a_CPPFLAGS = $(AM_CPPFLAGS) $(BITCOIN_INCLUDES) -DIDEO_BUILD
 libbitcoin_common_a_CXXFLAGS = $(AM_CXXFLAGS) $(PIE_FLAGS)
 libbitcoin_common_a_CFLAGS = $(AM_CXXFLAGS) $(PIE_FLAGS) -std=c99
 libbitcoin_common_a_SOURCES = \
@@ -574,8 +574,8 @@ libbitcoin_common_a_SOURCES = \
   cpp-ethereum/libethashseal/genesis/homesteadTest.cpp \
   cpp-ethereum/libethashseal/genesis/mainNetworkTest.cpp \
   cpp-ethereum/libethashseal/genesis/metropolisTest.cpp \
-  cpp-ethereum/libethashseal/genesis/qtumMainNetwork.cpp \
-  cpp-ethereum/libethashseal/genesis/qtumTestNetwork.cpp \
+  cpp-ethereum/libethashseal/genesis/ideoMainNetwork.cpp \
+  cpp-ethereum/libethashseal/genesis/ideoTestNetwork.cpp \
   cpp-ethereum/libethashseal/genesis/ropsten.cpp \
   cpp-ethereum/libethashseal/genesis/transitionnetTest.cpp \
   cpp-ethereum/libethash/ethash.h \
@@ -653,16 +653,16 @@ nodist_libbitcoin_util_a_SOURCES = $(srcdir)/obj/build.h
 #
 
 # bitcoind binary #
-qtumd_SOURCES = bitcoind.cpp
-qtumd_CPPFLAGS = $(AM_CPPFLAGS) $(BITCOIN_INCLUDES)
-qtumd_CXXFLAGS = $(AM_CXXFLAGS) $(PIE_FLAGS)
-qtumd_LDFLAGS = $(RELDFLAGS) $(AM_LDFLAGS) $(LIBTOOL_APP_LDFLAGS)
+ideod_SOURCES = bitcoind.cpp
+ideod_CPPFLAGS = $(AM_CPPFLAGS) $(BITCOIN_INCLUDES)
+ideod_CXXFLAGS = $(AM_CXXFLAGS) $(PIE_FLAGS)
+ideod_LDFLAGS = $(RELDFLAGS) $(AM_LDFLAGS) $(LIBTOOL_APP_LDFLAGS)
 
 if TARGET_WINDOWS
-qtumd_SOURCES += bitcoind-res.rc
+ideod_SOURCES += bitcoind-res.rc
 endif
 
-qtumd_LDADD = \
+ideod_LDADD = \
   $(LIBBITCOIN_SERVER) \
   $(LIBBITCOIN_WALLET) \
   $(LIBBITCOIN_COMMON) \
@@ -677,19 +677,19 @@ qtumd_LDADD = \
   $(LIBCRYPTOPP) \
   $(LIBSECP256K1)
 
-qtumd_LDADD += $(BOOST_LIBS) $(BDB_LIBS) $(SSL_LIBS) $(CRYPTO_LIBS) $(MINIUPNPC_LIBS) $(EVENT_PTHREADS_LIBS) $(EVENT_LIBS) $(ZMQ_LIBS)
+ideod_LDADD += $(BOOST_LIBS) $(BDB_LIBS) $(SSL_LIBS) $(CRYPTO_LIBS) $(MINIUPNPC_LIBS) $(EVENT_PTHREADS_LIBS) $(EVENT_LIBS) $(ZMQ_LIBS)
 
 # bitcoin-cli binary #
-qtum_cli_SOURCES = bitcoin-cli.cpp
-qtum_cli_CPPFLAGS = $(AM_CPPFLAGS) $(BITCOIN_INCLUDES) $(EVENT_CFLAGS)
-qtum_cli_CXXFLAGS = $(AM_CXXFLAGS) $(PIE_FLAGS)
-qtum_cli_LDFLAGS = $(RELDFLAGS) $(AM_LDFLAGS) $(LIBTOOL_APP_LDFLAGS)
+ideo_cli_SOURCES = bitcoin-cli.cpp
+ideo_cli_CPPFLAGS = $(AM_CPPFLAGS) $(BITCOIN_INCLUDES) $(EVENT_CFLAGS)
+ideo_cli_CXXFLAGS = $(AM_CXXFLAGS) $(PIE_FLAGS)
+ideo_cli_LDFLAGS = $(RELDFLAGS) $(AM_LDFLAGS) $(LIBTOOL_APP_LDFLAGS)
 
 if TARGET_WINDOWS
-qtum_cli_SOURCES += bitcoin-cli-res.rc
+ideo_cli_SOURCES += bitcoin-cli-res.rc
 endif
 
-qtum_cli_LDADD = \
+ideo_cli_LDADD = \
   $(LIBBITCOIN_CLI) \
   $(LIBUNIVALUE) \
   $(LIBBITCOIN_UTIL) \
@@ -700,20 +700,20 @@ qtum_cli_LDADD = \
   $(LIBCRYPTOPP) \
   $(LIBSECP256K1)
 
-qtum_cli_LDADD += $(BOOST_LIBS) $(SSL_LIBS) $(CRYPTO_LIBS) $(EVENT_LIBS)
+ideo_cli_LDADD += $(BOOST_LIBS) $(SSL_LIBS) $(CRYPTO_LIBS) $(EVENT_LIBS)
 #
 
 # bitcoin-tx binary #
-qtum_tx_SOURCES = bitcoin-tx.cpp consensus/consensus.cpp
-qtum_tx_CPPFLAGS = $(AM_CPPFLAGS) $(BITCOIN_INCLUDES)
-qtum_tx_CXXFLAGS = $(AM_CXXFLAGS) $(PIE_FLAGS)
-qtum_tx_LDFLAGS = $(RELDFLAGS) $(AM_LDFLAGS) $(LIBTOOL_APP_LDFLAGS)
+ideo_tx_SOURCES = bitcoin-tx.cpp consensus/consensus.cpp
+ideo_tx_CPPFLAGS = $(AM_CPPFLAGS) $(BITCOIN_INCLUDES)
+ideo_tx_CXXFLAGS = $(AM_CXXFLAGS) $(PIE_FLAGS)
+ideo_tx_LDFLAGS = $(RELDFLAGS) $(AM_LDFLAGS) $(LIBTOOL_APP_LDFLAGS)
 
 if TARGET_WINDOWS
-qtum_tx_SOURCES += bitcoin-tx-res.rc
+ideo_tx_SOURCES += bitcoin-tx-res.rc
 endif
 
-qtum_tx_LDADD = \
+ideo_tx_LDADD = \
   $(LIBUNIVALUE) \
   $(LIBBITCOIN_COMMON) \
   $(LIBBITCOIN_UTIL) \
@@ -725,7 +725,7 @@ qtum_tx_LDADD = \
   $(LIBCRYPTOPP) \
   $(LIBSECP256K1)
 
-qtum_tx_LDADD += $(BOOST_LIBS) $(CRYPTO_LIBS)
+ideo_tx_LDADD += $(BOOST_LIBS) $(CRYPTO_LIBS)
 #
 
 # bitcoinconsensus library #

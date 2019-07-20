@@ -98,9 +98,9 @@ static int AppInitRawTx(int argc, char* argv[])
 
     if (argc < 2 || HelpRequested(gArgs)) {
         // First part of help message is specific to this utility
-        std::string strUsage = PACKAGE_NAME " qtum-tx utility version " + FormatFullVersion() + "\n\n" +
-            "Usage:  qtum-tx [options] <hex-tx> [commands]  Update hex-encoded qtum transaction\n" +
-            "or:     qtum-tx [options] -create [commands]   Create hex-encoded qtum transaction\n" +
+        std::string strUsage = PACKAGE_NAME " ideo-tx utility version " + FormatFullVersion() + "\n\n" +
+            "Usage:  ideo-tx [options] <hex-tx> [commands]  Update hex-encoded ideo transaction\n" +
+            "or:     ideo-tx [options] -create [commands]   Create hex-encoded ideo transaction\n" +
             "\n";
         strUsage += gArgs.GetHelpMessage();
 

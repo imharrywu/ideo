@@ -4,15 +4,15 @@ from test_framework.test_framework import BitcoinTestFramework
 from test_framework.util import *
 from test_framework.script import *
 from test_framework.mininode import *
-from test_framework.qtum import *
+from test_framework.ideo import *
 from test_framework.address import *
 from test_framework.blocktools import *
 
 
 """
-Note, these tests do not test the functionality of the DGP template contract itself, for tests for the DGP template, see qtum-dgp.py
+Note, these tests do not test the functionality of the DGP template contract itself, for tests for the DGP template, see ideo-dgp.py
 """
-class QtumDGPGasPriceLingeringMempoolTxTest(BitcoinTestFramework):
+class IdeologyDGPGasPriceLingeringMempoolTxTest(BitcoinTestFramework):
     def set_test_params(self):
         self.setup_clean_chain = True
         self.num_nodes = 2
@@ -62,7 +62,7 @@ class QtumDGPGasPriceLingeringMempoolTxTest(BitcoinTestFramework):
         # until they connect later on
         self.stop_node(1)
         self.start_node(1)
-        self.nodes[1].createcontract("00", 1000000, QTUM_MIN_GAS_PRICE_STR)
+        self.nodes[1].createcontract("00", 1000000, IDEO_MIN_GAS_PRICE_STR)
 
         # Set the minimum gas price to 100
         self.create_proposal_contract(100)
@@ -81,4 +81,4 @@ class QtumDGPGasPriceLingeringMempoolTxTest(BitcoinTestFramework):
 
 
 if __name__ == '__main__':
-    QtumDGPGasPriceLingeringMempoolTxTest().main()
+    IdeologyDGPGasPriceLingeringMempoolTxTest().main()

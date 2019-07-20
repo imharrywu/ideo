@@ -36,7 +36,7 @@
     <name>BanTableModel</name>
     </context>
 <context>
-    <name>QtumGUI</name>
+    <name>IdeologyGUI</name>
     </context>
 <context>
     <name>CoinControlDialog</name>
@@ -178,6 +178,6 @@
     <name>WalletView</name>
     </context>
 <context>
-    <name>qtum-core</name>
+    <name>ideo-core</name>
     </context>
 </TS>

@@ -5,12 +5,12 @@ from test_framework.util import *
 from test_framework.script import *
 from test_framework.mininode import *
 from test_framework.address import *
-from test_framework.qtum import *
+from test_framework.ideo import *
 import sys
 import random
 
 
-class QtumSoftMinerGasRelatedLimitsTest(BitcoinTestFramework):
+class IdeologySoftMinerGasRelatedLimitsTest(BitcoinTestFramework):
     def set_test_params(self):
         self.setup_clean_chain = True
         self.num_nodes = 8
@@ -173,4 +173,4 @@ class QtumSoftMinerGasRelatedLimitsTest(BitcoinTestFramework):
         self.verify_hard_block_gas_limit_test()
 
 if __name__ == '__main__':
-    QtumSoftMinerGasRelatedLimitsTest().main()
+    IdeologySoftMinerGasRelatedLimitsTest().main()

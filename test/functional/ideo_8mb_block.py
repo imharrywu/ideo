@@ -5,9 +5,9 @@ from test_framework.util import *
 from test_framework.script import *
 from test_framework.mininode import *
 from test_framework.blocktools import *
-from test_framework.qtum import *
+from test_framework.ideo import *
 
-class Qtum8MBBlock(BitcoinTestFramework):
+class Ideology8MBBlock(BitcoinTestFramework):
     def set_test_params(self):
         self.setup_clean_chain = True
         self.num_nodes = 2
@@ -82,4 +82,4 @@ class Qtum8MBBlock(BitcoinTestFramework):
         assert_equal(block_count+1, self.nodes[1].getblockcount())
 
 if __name__ == '__main__':
-    Qtum8MBBlock().main()
+    Ideology8MBBlock().main()

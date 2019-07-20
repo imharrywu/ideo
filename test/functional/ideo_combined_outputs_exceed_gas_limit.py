@@ -4,11 +4,11 @@ from test_framework.test_framework import BitcoinTestFramework
 from test_framework.util import *
 from test_framework.script import *
 from test_framework.mininode import *
-from test_framework.qtum import *
+from test_framework.ideo import *
 from test_framework.address import *
 import time
 
-class QtumCombinedOutputsExceedGasLimitTest(BitcoinTestFramework):
+class IdeologyCombinedOutputsExceedGasLimitTest(BitcoinTestFramework):
     def set_test_params(self):
         self.setup_clean_chain = True
         self.num_nodes = 1
@@ -36,9 +36,9 @@ class QtumCombinedOutputsExceedGasLimitTest(BitcoinTestFramework):
         tx = CTransaction()
         tx.vin = [make_vin(self.node, int(20000*COIN))]
         tx.vout = [
-            CTxOut(0, CScript([b"\x04", CScriptNum(19998999), CScriptNum(QTUM_MIN_GAS_PRICE), hex_str_to_bytes("00"), hex_str_to_bytes(contract_address), OP_CALL])),
-            CTxOut(0, CScript([b"\x04", CScriptNum(19998999), CScriptNum(QTUM_MIN_GAS_PRICE), hex_str_to_bytes("00"), hex_str_to_bytes(contract_address), OP_CALL])),
-            CTxOut(0, CScript([b"\x04", CScriptNum(19998999), CScriptNum(QTUM_MIN_GAS_PRICE), hex_str_to_bytes("00"), hex_str_to_bytes(contract_address), OP_CALL]))
+            CTxOut(0, CScript([b"\x04", CScriptNum(19998999), CScriptNum(IDEO_MIN_GAS_PRICE), hex_str_to_bytes("00"), hex_str_to_bytes(contract_address), OP_CALL])),
+            CTxOut(0, CScript([b"\x04", CScriptNum(19998999), CScriptNum(IDEO_MIN_GAS_PRICE), hex_str_to_bytes("00"), hex_str_to_bytes(contract_address), OP_CALL])),
+            CTxOut(0, CScript([b"\x04", CScriptNum(19998999), CScriptNum(IDEO_MIN_GAS_PRICE), hex_str_to_bytes("00"), hex_str_to_bytes(contract_address), OP_CALL]))
         ]
         signed_tx_raw = self.node.signrawtransactionwithwallet(bytes_to_hex_str(tx.serialize()))['hex']
         #
@@ -48,4 +48,4 @@ class QtumCombinedOutputsExceedGasLimitTest(BitcoinTestFramework):
         assert_equal(self.node.getblockcount(), block_count+2)
 
 if __name__ == '__main__':
-    QtumCombinedOutputsExceedGasLimitTest().main()
+    IdeologyCombinedOutputsExceedGasLimitTest().main()
