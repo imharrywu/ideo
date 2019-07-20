@@ -128,3 +128,8 @@ src/qt/test/test_qtum-qt
 src/test/buildenv.py
 src/test/test_qtum
 src/test/test_qtum_fuzzy
+
+depends/SDKs
+depends/sdk-sources
+depends/sources
+
