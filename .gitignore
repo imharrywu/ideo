@@ -1,7 +1,10 @@
 *.tar.gz
-
+/built/
 *.exe
 src/bitcoin
+src/ideod
+src/ideo-cli
+src/ideo-tx
 src/bitcoind
 src/bitcoin-cli
 src/bitcoin-tx
