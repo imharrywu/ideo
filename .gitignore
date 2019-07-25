@@ -1,3 +1,8 @@
+Ideology-Qt.app/
+dist/
+dpi36.background.tiff
+dpi72.background.tiff
+src/qt/ideo-qt
 *.tar.gz
 /built/
 *.exe
