@@ -108,8 +108,6 @@ fi
 # before_install:
 export PATH=$(echo $PATH | tr ':' "\n" | sed '/\/opt\/python/d' | tr "\n" ":" | sed "s|::|:|g")
 
-git submodule update --init --recursive
-
 sudo apt-get install --no-install-recommends --no-upgrade -qq automake autoconf libltdl-dev libtool; 
 
 # install:
